@@ -1,0 +1,24 @@
+  <List>
+          {allArticles.map((a) => {
+            return (
+              <Article key={a.id}>
+                {/* <h3>{a.title}</h3> */}
+                {/* <p>{a.abstract}</p> */}
+                {a.id}
+                <NextLink
+                  href={{
+                    pathname: '/article/[id]',
+                    query: {
+                      id: a.id,
+                      title: a.title,
+                      abstract: a.abstract
+                    }
+                  }}
+                >
+                  <h3>{a.title}</h3>
+                </NextLink>
+                <p>{a.abstract}</p>
+              </Article>
+            )
+          })}
+        </List>

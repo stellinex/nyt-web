@@ -1,65 +1,75 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState, useEffect } from 'react'
+import {
+  Card,
+  NextLink,
+  Title,
+  Container,
+  Main,
+  Footer,
+  List,
+  Article,
+  Content,
+  PopularContent,
+  SearchContent,
+  PeriodSelector,
+  Selector
+} from '../styles/styled'
+import SearchArticles from '../components/searchArticles'
+import PopularArticles from '../components/popularArticles'
 
 export default function Home() {
+  const [allArticles, setAllArticles] = useState([])
+  const [data, setData] = useState(null)
+  const [search, setSearch] = useState('')
+  const [period, setPeriod] = useState('1day')
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
+
+  // useEffect(() => {
+  //   if (search) {
+  //     const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=z9mOsrys9iDC3Abbq9vKcQoG7D3eq2KJ`
+  //     fetch(url)
+  //       .then((res) => res.json())
+  //       .then((data) => setData(data))
+  //   }
+  // }, [search])
+
+  const allList = data && data.response.docs
+
   return (
-    <div className={styles.container}>
+    <Container>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>New York Times - Most Popular</title>
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Main>
+        <Title>New York Times</Title>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        {/* <NextLink href='/detail'>
+          <Card>Detail &rarr;</Card>
+        </NextLink> */}
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <Content>
+          <PopularContent>
+            <PeriodSelector>
+              Most Viewed by
+              <Selector onClick={() => setPeriod('1day')}>1 day</Selector>
+              <Selector onClick={() => setPeriod('7days')}>7 days</Selector>
+              <Selector onClick={() => setPeriod('30days')}>30 days</Selector>
+            </PeriodSelector>
+            <PopularArticles period={period} />
+          </PopularContent>
+          <SearchContent>
+            <SearchArticles />
+          </SearchContent>
+        </Content>
+      </Main>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      <Footer>Created by Phollawat Attasukvattana</Footer>
+    </Container>
   )
 }
