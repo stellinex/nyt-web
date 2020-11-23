@@ -1,12 +1,19 @@
 import { useRouter } from 'next/router'
 import { Card, NextLink, Title, Container, Main, Footer } from '../../styles/styled'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
 export default function Article() {
   const router = useRouter()
   const { id } = router.query
-  console.log('X', router)
-  console.log(sessionStorage.getItem(id))
+  const [article, setArticle] = useState(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setArticle(JSON.parse(window.localStorage.getItem(id)))
+    }
+  }, [])
+
   return (
     <Container>
       <Head>
@@ -21,8 +28,8 @@ export default function Article() {
           <Card>Home &rarr;</Card>
         </NextLink>
 
-        <h1>{JSON.parse(sessionStorage.getItem(id)).title}</h1>
-        <p>{JSON.parse(sessionStorage.getItem(id)).abstract}</p>
+        {article && <h1>{article.title}</h1>}
+        {article && <p>{article.abstract}</p>}
       </Main>
 
       <Footer>Created by Phollawat Attasukvattana</Footer>

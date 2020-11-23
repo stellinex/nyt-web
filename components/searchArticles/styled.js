@@ -57,3 +57,8 @@ export const ReadMore = styled.a`
 export const SearchItem = styled.span`
   display: block;
 `
+
+export const Abstract = styled.p`
+  font-size: 16px;
+  color: grey;
+`

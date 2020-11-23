@@ -37,7 +37,9 @@ export default function PopularArticles({ period }) {
       const data = await res.json()
       data.results.map((result) => {
         const { id } = result
-        sessionStorage.setItem(id, JSON.stringify(result))
+        if (typeof window !== 'undefined') {
+          window.localStorage.setItem(id, JSON.stringify(result))
+        }
       })
       setResults(Object.entries(_.groupBy(data.results, 'section')))
     } catch (err) {

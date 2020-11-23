@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 
 import {
   CardList,
@@ -7,12 +6,11 @@ import {
   Label,
   Input,
   Item,
-  ReadMore,
-  SearchItem
+  SearchItem,
+  Abstract
 } from './styled'
 
 export default function SearchArticles() {
-  // states - input query, article
   const [query, setQuery] = useState('')
   const [articles, setArticles] = useState([])
   const handleSearch = async (e) => {
@@ -23,15 +21,8 @@ export default function SearchArticles() {
     try {
       const res = await fetch(url)
       const data = await res.json()
-      console.log(data.response.docs)
       const results = data.response.docs
-      results.map((result) => {
-        const { _id } = result
-        const id = _id.slice(-8, -1)
-        sessionStorage.setItem(id, JSON.stringify(result))
-      })
-
-      setArticles(data.response.docs)
+      setArticles(results)
     } catch (err) {
       console.error(err)
     }
@@ -54,9 +45,7 @@ export default function SearchArticles() {
           return (
             <Item key={article._id}>
               <SearchItem>{article.headline.main}</SearchItem>
-              <Link href={`/article-from-search/${article._id.slice(-8, -1)}`}>
-                <ReadMore>Read more</ReadMore>
-              </Link>
+              <Abstract>{article.abstract}</Abstract>
             </Item>
           )
         })}
