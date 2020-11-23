@@ -91,6 +91,10 @@ export const Article = styled.li`
 
 export const PeriodSelector = styled.div`
   margin-bottom: 12px;
+  min-width: 60px;
+  margin-left: 24px;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 export const Selector = styled.button`
@@ -111,12 +115,21 @@ export const Selector = styled.button`
 export const Content = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
 `
 
 export const PopularContent = styled.div`
   width: 60%;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 `
 
 export const SearchContent = styled.div`
   width: 40%;
+
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
 `

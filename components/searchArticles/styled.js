@@ -4,7 +4,6 @@ export const SearchButton = styled.button`
   font-family: karla;
   border: 1px solid #eaeaea;
   background-color: transparent;
-  margin-left: 12px;
   color: #0070f3;
   border-radius: 5px;
 
@@ -28,6 +27,14 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   font-family: karla;
+  width: 100px;
+  flex-shrink: 1;
+  margin-right: 16px;
+`
+
+export const Form = styled.form`
+  display: flex;
+  flex-wrap: wrap;
 `
 
 export const Item = styled.li`

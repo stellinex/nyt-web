@@ -7,7 +7,8 @@ import {
   Input,
   Item,
   SearchItem,
-  Abstract
+  Abstract,
+  Form
 } from './styled'
 
 export default function SearchArticles() {
@@ -30,7 +31,7 @@ export default function SearchArticles() {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleSearch}>
+      <Form onSubmit={handleSearch}>
         <Label>Search</Label>
         <Input
           type='text'
@@ -39,7 +40,7 @@ export default function SearchArticles() {
           onChange={(e) => setQuery(e.target.value)}
         />
         <SearchButton type='submit'>Go</SearchButton>
-      </form>
+      </Form>
       <CardList>
         {articles.map((article) => {
           return (
